@@ -22,18 +22,40 @@ namespace DocumentClassifierGUI
     public partial class DocumentMarkingView : UserControl, IDocumentMarkingView
     {
         private Polygon actualPolygon;
+        private (string Name, Brush Color) actualItemClass;
+
         private ObservableCollection<Point> actualPolygonCheckpoints = new ObservableCollection<Point>();
         private List<Ellipse> points = new List<Ellipse>();
+
+        private ObservableCollection<MarkedItem> markedItems = new ObservableCollection<MarkedItem>();
+
         public DocumentMarkingView()
         {
             InitializeComponent();
 
+            actualItemClass = DocumentClasses.Stamp;
+
             resetActualPolygon();
 
             DocumentSurface.Background = new ImageBrush(new BitmapImage(new Uri(@"test_document.jpg", UriKind.Relative))) { Stretch = Stretch.Fill };
-            DocumentSurface.Children.Add(actualPolygon);
 
             actualPolygonCheckpoints.CollectionChanged += ActualPolygonCheckpoints_CollectionChanged;
+            markedItems.CollectionChanged += MarkedItems_CollectionChanged;
+        }
+
+        private void MarkedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (MarkedItem newItem in e.NewItems)
+                    DocumentSurface.Children.Add(newItem.polygon);
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (MarkedItem deletedItem in e.OldItems)
+                    DocumentSurface.Children.Remove(deletedItem.polygon);
+            }
         }
 
         private void ActualPolygonCheckpoints_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -65,15 +87,18 @@ namespace DocumentClassifierGUI
 
         private void resetActualPolygon()
         {
+            DocumentSurface.Children.Remove(actualPolygon);
+
             actualPolygon = new Polygon()
             {
                 Stroke = Brushes.Black,
-                Fill = Brushes.Red,
+                Fill = actualItemClass.Color,
                 FillRule = FillRule.Nonzero,
                 Opacity = 0.6
             };
 
             actualPolygonCheckpoints.Clear();
+            DocumentSurface.Children.Add(actualPolygon);
         }
 
         private void DocumentSurface_MouseDown(object sender, MouseButtonEventArgs e)
@@ -85,7 +110,7 @@ namespace DocumentClassifierGUI
                 actualPolygon.Points.Add(newPoint);
                 actualPolygonCheckpoints.Add(newPoint);
             }
-            else if(e.RightButton == MouseButtonState.Pressed)
+            else if (e.RightButton == MouseButtonState.Pressed)
             {
                 if (actualPolygonCheckpoints.Count != 0)
                 {
@@ -104,6 +129,22 @@ namespace DocumentClassifierGUI
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 actualPolygon.Points.Add(e.GetPosition(this));
+        }
+
+        public void SaveActualElement()
+        {
+            var polygon = new Polygon()
+            {
+                Fill = actualItemClass.Color,
+                FillRule = FillRule.Nonzero
+            };
+
+            foreach (var point in actualPolygon.Points)
+                polygon.Points.Add(point);
+
+            resetActualPolygon();
+
+            markedItems.Add(new MarkedItem(actualItemClass, polygon));
         }
     }
 }
