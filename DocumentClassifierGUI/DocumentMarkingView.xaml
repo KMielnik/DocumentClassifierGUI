@@ -8,7 +8,8 @@
              d:DesignHeight="600" d:DesignWidth="500">
     <Grid>
         <Canvas Name="DocumentSurface" Background="AliceBlue" 
-                MouseDown="DocumentSurface_MouseDown" MouseMove="DocumentSurface_MouseMove"
+                MouseDown="DocumentSurface_MouseDown"
+                MouseMove="DocumentSurface_MouseMove"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
     </Grid>
 </UserControl>
