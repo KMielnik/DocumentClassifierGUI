@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ContentControl Name="ZoomableControl" MouseWheel="ZoomableControl_MouseWheel">
+        <ContentControl Name="ZoomableControl" MouseWheel="ZoomableControl_MouseWheel"
+                        MouseMove="ZoomableControl_MouseMove" MouseDown="ZoomableControl_MouseDown">
             <ContentControl.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="scaleTransform"/>

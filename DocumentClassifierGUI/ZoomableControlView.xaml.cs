@@ -62,5 +62,25 @@ namespace DocumentClassifierGUI
                 }
             }
         }
+
+        private Point previousPosition;
+
+        private void ZoomableControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.MiddleButton == MouseButtonState.Pressed)
+            {
+                var delta = e.GetPosition(this) - previousPosition;
+                translateTransform.X += delta.X;
+                translateTransform.Y += delta.Y;
+
+                previousPosition = e.GetPosition(this);
+            }
+        }
+
+        private void ZoomableControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Middle)
+                previousPosition = e.GetPosition(this);
+        }
     }
 }
