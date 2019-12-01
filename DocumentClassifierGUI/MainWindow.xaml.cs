@@ -31,7 +31,9 @@ namespace DocumentClassifierGUI
         private void DocumentMarkingViewSetup()
         {
             documentMarkingView = new DocumentMarkingView();
-            DocumentMarkingControl.Content = documentMarkingView;
+            var zoomableView = new ZoomableControlView(documentMarkingView);
+
+            DocumentMarkingZoomableControl.Content = zoomableView;
         }
     }
 }
