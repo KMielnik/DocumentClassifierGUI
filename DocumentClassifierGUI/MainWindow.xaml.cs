@@ -52,5 +52,13 @@ namespace DocumentClassifierGUI
 
             DocumentMarkingZoomableControl.Content = zoomableView;
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                documentMarkingView.SaveActualElement();
+            else if (e.Key == Key.Tab)
+                documentMarkingView.SaveMaskToFile(new Uri("mask.png", UriKind.Relative));
+        }
     }
 }

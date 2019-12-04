@@ -155,16 +155,25 @@ namespace DocumentClassifierGUI
 
         public void SaveMaskToFile(Uri location)
         {
-            var rtb = new RenderTargetBitmap(595, 726, 96d, 96d, System.Windows.Media.PixelFormats.Default);
+            var rtb = new RenderTargetBitmap(
+                (int)DocumentSurface.RenderSize.Width,
+                (int)DocumentSurface.RenderSize.Height,
+                96d, 96d, System.Windows.Media.PixelFormats.Default);
 
             resetActualPolygon();
             var background = DocumentSurface.Background;
             DocumentSurface.Background = Brushes.White;
+            DocumentSurface.UpdateLayout();
 
             rtb.Render(DocumentSurface);
 
+            var resized = new TransformedBitmap(rtb, new ScaleTransform(
+                595 / DocumentSurface.RenderSize.Width,
+                726 / DocumentSurface.RenderSize.Height));
+
             var pngEncoder = new PngBitmapEncoder();
-            pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
+            pngEncoder.Frames.Add(BitmapFrame.Create(resized));
+            
 
             using(var fs = System.IO.File.OpenWrite("mask.png"))
             {
