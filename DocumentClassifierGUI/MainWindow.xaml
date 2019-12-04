@@ -4,15 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocumentClassifierGUI"
+        xmlns:documentclassselectioncontrols="clr-namespace:DocumentClassifierGUI.DocumentClassSelectionControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" MaxWidth="200"/>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" MaxWidth="200"/>
         </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <ContentControl Name="DocumentClassSelectionControl" Grid.Row="1"/>
+        </Grid>
         
-        <ContentControl Name="DocumentMarkingZoomableControl" Grid.Column="1" />
+        <ContentControl Name="DocumentMarkingZoomableControl" Grid.Column="1" Panel.ZIndex="-1"/>
     </Grid>
 </Window>

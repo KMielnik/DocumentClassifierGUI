@@ -32,9 +32,6 @@ namespace DocumentClassifierGUI
         public DocumentMarkingView()
         {
             InitializeComponent();
-
-            actualItemClass = DocumentClasses.Stamp;
-
             resetActualPolygon();
 
             DocumentSurface.Background = new ImageBrush(new BitmapImage(new Uri(@"test_document.jpg", UriKind.Relative))) { Stretch = Stretch.Fill };
@@ -145,6 +142,13 @@ namespace DocumentClassifierGUI
             resetActualPolygon();
 
             markedItems.Add(new MarkedItem(actualItemClass, polygon));
+        }
+
+        public void SetActualDocumentClass((string Name, Brush Color) newItemClass)
+        {
+            actualItemClass = newItemClass;
+
+            actualPolygon.Fill = actualItemClass.Color;
         }
     }
 }

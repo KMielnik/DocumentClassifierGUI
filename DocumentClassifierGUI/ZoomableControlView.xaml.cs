@@ -52,14 +52,11 @@ namespace DocumentClassifierGUI
 
             if (e.Delta < 0)
             {
-                if (scaleTransform.ScaleX > 1)
-                {
-                    scaleTransform.ScaleX = 1;
-                    scaleTransform.ScaleY = 1;
+                scaleTransform.ScaleX = 1;
+                scaleTransform.ScaleY = 1;
 
-                    translateTransform.X = 0;
-                    translateTransform.Y = 0;
-                }
+                translateTransform.X = 0;
+                translateTransform.Y = 0;
             }
         }
 

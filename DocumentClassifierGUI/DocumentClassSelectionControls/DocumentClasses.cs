@@ -9,5 +9,6 @@ namespace DocumentClassifierGUI
     {
         public static (string Name, Brush Color) Stamp => ("Stamp", Brushes.Green);
         public static (string Name, Brush Color) Text => ("Text", Brushes.Blue);
+        public static (string Name, Brush Color) Sign => ("Sign", Brushes.Orange);
     }
 }

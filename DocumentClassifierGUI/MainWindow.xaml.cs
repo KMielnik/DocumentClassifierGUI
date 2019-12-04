@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentClassifierGUI.DocumentClassSelectionControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,27 @@ namespace DocumentClassifierGUI
     public partial class MainWindow : Window
     {
         IDocumentMarkingView documentMarkingView;
+        IDocumentClassSelectionView documentClassSelectionView;
         public MainWindow()
         {
             InitializeComponent();
 
             DocumentMarkingViewSetup();
+            DocumentClassSelectionSetup();
+        }
+
+        private void DocumentClassSelectionSetup()
+        {
+            documentClassSelectionView = new DocumentClassSelectionView();
+
+            documentClassSelectionView.SelectionChanged += DocumentClassSelectionView_SelectionChanged;
+
+            DocumentClassSelectionControl.Content = documentClassSelectionView;
+        }
+
+        private void DocumentClassSelectionView_SelectionChanged(object sender, DocumentClassSelectionChangedEventAgrs e)
+        {
+            documentMarkingView.SetActualDocumentClass(e.NewClass);
         }
 
         private void DocumentMarkingViewSetup()
