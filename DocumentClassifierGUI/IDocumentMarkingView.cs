@@ -1,10 +1,12 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 
 namespace DocumentClassifierGUI
 {
     public interface IDocumentMarkingView
     {
         public void SaveActualElement();
+        public void SaveMaskToFile(Uri location);
         public void SetActualDocumentClass((string Name, Brush Color) newItemClass);
     }
 }

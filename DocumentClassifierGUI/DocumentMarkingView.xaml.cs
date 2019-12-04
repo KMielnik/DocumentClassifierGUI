@@ -32,6 +32,8 @@ namespace DocumentClassifierGUI
         public DocumentMarkingView()
         {
             InitializeComponent();
+
+            actualItemClass = DocumentClasses.Text;
             resetActualPolygon();
 
             DocumentSurface.Background = new ImageBrush(new BitmapImage(new Uri(@"test_document.jpg", UriKind.Relative))) { Stretch = Stretch.Fill };
@@ -149,6 +151,27 @@ namespace DocumentClassifierGUI
             actualItemClass = newItemClass;
 
             actualPolygon.Fill = actualItemClass.Color;
+        }
+
+        public void SaveMaskToFile(Uri location)
+        {
+            var rtb = new RenderTargetBitmap(595, 726, 96d, 96d, System.Windows.Media.PixelFormats.Default);
+
+            resetActualPolygon();
+            var background = DocumentSurface.Background;
+            DocumentSurface.Background = Brushes.White;
+
+            rtb.Render(DocumentSurface);
+
+            var pngEncoder = new PngBitmapEncoder();
+            pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
+
+            using(var fs = System.IO.File.OpenWrite("mask.png"))
+            {
+                pngEncoder.Save(fs);
+            }
+
+            DocumentSurface.Background = background;
         }
     }
 }
