@@ -1,4 +1,5 @@
 ﻿using DocumentClassifierGUI.DocumentClassSelectionControls;
+using DocumentClassifierGUI.OnScreenMarkedItemsControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,21 @@ namespace DocumentClassifierGUI
     {
         IDocumentMarkingView documentMarkingView;
         IDocumentClassSelectionView documentClassSelectionView;
+        IOnScreenMarkedItemsView onScreenMarkedItemsView;
         public MainWindow()
         {
             InitializeComponent();
 
             DocumentMarkingViewSetup();
             DocumentClassSelectionSetup();
+            OnScreenMarkedItemsViewSetup();
+        }
+
+        private void OnScreenMarkedItemsViewSetup()
+        {
+            onScreenMarkedItemsView = new OnScreenMarkedItemsView();
+
+            OnScreenMarkedItemsControl.Content = onScreenMarkedItemsView;
         }
 
         private void DocumentClassSelectionSetup()
@@ -48,9 +58,16 @@ namespace DocumentClassifierGUI
         private void DocumentMarkingViewSetup()
         {
             documentMarkingView = new DocumentMarkingView();
-            var zoomableView = new ZoomableControlView(documentMarkingView);
 
+            documentMarkingView.MarkedItemsChanged += DocumentMarkingView_MarkedItemsChanged;
+
+            var zoomableView = new ZoomableControlView(documentMarkingView);
             DocumentMarkingZoomableControl.Content = zoomableView;
+        }
+
+        private void DocumentMarkingView_MarkedItemsChanged(object sender, MarkedItemsChangedEventArgs e)
+        {
+            onScreenMarkedItemsView.SetMarkedItems(e.Items);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

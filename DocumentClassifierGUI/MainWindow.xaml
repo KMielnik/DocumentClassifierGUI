@@ -25,5 +25,14 @@
         </Grid>
         
         <ContentControl Name="DocumentMarkingZoomableControl" Grid.Column="1" Panel.ZIndex="-1"/>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ContentControl Name="OnScreenMarkedItemsControl" Grid.Row="0"/>
+        </Grid>
     </Grid>
 </Window>

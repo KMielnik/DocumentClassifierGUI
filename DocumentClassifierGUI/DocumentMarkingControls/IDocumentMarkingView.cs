@@ -8,6 +8,6 @@ namespace DocumentClassifierGUI
         public void SaveActualElement();
         public void SaveMaskToFile(Uri location);
         public void SetActualDocumentClass((string Name, Brush Color) newItemClass);
-        public event EventHandler MarkedItemsChanged;
+        public event EventHandler<MarkedItemsChangedEventArgs> MarkedItemsChanged;
     }
 }

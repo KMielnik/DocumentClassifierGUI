@@ -29,6 +29,8 @@ namespace DocumentClassifierGUI
 
         private ObservableCollection<MarkedItem> markedItems = new ObservableCollection<MarkedItem>();
 
+        public event EventHandler<MarkedItemsChangedEventArgs> MarkedItemsChanged;
+
         public DocumentMarkingView()
         {
             InitializeComponent();
@@ -40,6 +42,7 @@ namespace DocumentClassifierGUI
 
             actualPolygonCheckpoints.CollectionChanged += ActualPolygonCheckpoints_CollectionChanged;
             markedItems.CollectionChanged += MarkedItems_CollectionChanged;
+            markedItems.CollectionChanged += (s,e) => MarkedItemsChanged?.Invoke(s, new MarkedItemsChangedEventArgs(markedItems));
         }
 
         private void MarkedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
