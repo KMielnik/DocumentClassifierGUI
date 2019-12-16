@@ -135,6 +135,9 @@ namespace DocumentClassifierGUI
 
         public void SaveActualElement()
         {
+            if (actualPolygon.Points.Count <= 4)
+                return;
+
             var polygon = new Polygon()
             {
                 Fill = actualItemClass.Color,
@@ -184,6 +187,11 @@ namespace DocumentClassifierGUI
             }
 
             DocumentSurface.Background = background;
+        }
+
+        public void DeleteMarkedItem(MarkedItem markedItem)
+        {
+            markedItems.Remove(markedItem);
         }
     }
 }

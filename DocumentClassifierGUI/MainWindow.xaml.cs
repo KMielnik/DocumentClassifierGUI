@@ -38,6 +38,8 @@ namespace DocumentClassifierGUI
         {
             onScreenMarkedItemsView = new OnScreenMarkedItemsView();
 
+            onScreenMarkedItemsView.MarkedItemDeleted += (s, e) => documentMarkingView.DeleteMarkedItem(e.deletedItem);
+
             OnScreenMarkedItemsControl.Content = onScreenMarkedItemsView;
         }
 

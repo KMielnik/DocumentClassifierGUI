@@ -7,14 +7,51 @@
              mc:Ignorable="d" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="450" d:DesignWidth="200">
-    <Grid>
+    <UserControl.Resources>
+        <local:MarkedItemToCanvasConverter x:Key="converter"/>
+    </UserControl.Resources>
+    <Grid KeyDown="Grid_KeyDown" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <ListBox Name="MarkedItemsListBox" ItemsSource="{Binding MarkedItems}" 
-                 Margin="5">
+                 Margin="5" Grid.Row="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Type}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ContentControl Grid.Column="0" Content="{Binding Converter={StaticResource converter}, Mode=OneWay}"
+                                        Width="50" Height="50"/>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                <TextBlock Text="Color: "/>
+                                <TextBlock Text="{Binding Color}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <TextBlock Text="Type: "/>
+                                <TextBlock Text="{Binding Type}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        
+        <Button Grid.Row="1" Content="Delete Selected Item"
+                Margin="5"
+                Click="DeleteButton_Click"/>
     </Grid>
 </UserControl>
