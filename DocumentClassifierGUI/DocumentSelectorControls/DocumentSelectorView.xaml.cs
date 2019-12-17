@@ -45,7 +45,7 @@ namespace DocumentClassifierGUI.DocumentSelectorControls
                 .Select(x => Regex.Match(x, @"[\\].+[.]").Value)
                 .Select(x => x.Replace(".", string.Empty))
                 .Select(x => x.Replace("\\", string.Empty))
-                .OrderBy(x => int.Parse(x))
+                .OrderBy(x => { int.TryParse(x, out int o); return o; })
                 .Select(x => new Document(x))
                 .ToList()
                 .ForEach(x => documents.Add(x));
