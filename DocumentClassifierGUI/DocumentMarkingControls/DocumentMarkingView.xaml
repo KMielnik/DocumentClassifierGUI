@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DocumentClassifierGUI"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="500"
-             Height="600" Width="500">
+             d:DesignHeight="600" d:DesignWidth="500">
     <Grid>
-        <Canvas Background="AliceBlue"
+        <Canvas Name="DocumentSurface" Background="AliceBlue" 
+                MouseDown="DocumentSurface_MouseDown"
+                MouseMove="DocumentSurface_MouseMove"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
     </Grid>
 </UserControl>

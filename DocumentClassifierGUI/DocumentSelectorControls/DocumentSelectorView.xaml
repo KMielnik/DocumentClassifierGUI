@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DocumentClassifierGUI.DocumentSelectorControls"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="450" d:DesignWidth="200">
+    <UserControl.Resources>
+        <local:StatusConverter x:Key="StatusConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0" ItemsSource="{Binding documents}" 
+                 SelectionChanged="ListBox_SelectionChanged"
+                 Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Fill="{Binding DocumentStatus, Converter={StaticResource StatusConverter}, Mode=OneWay}" 
+                                   Stroke="Black" StrokeThickness="1"
+                                   Margin="3"/>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Grid.Row="1" Text="File: "/>
+                                <TextBlock Grid.Row="1" Text="{Binding Name}"/>
+                                <TextBlock Grid.Row="1" Text=".jpg"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Grid.Row="1" Text="Marked Items: "/>
+                                <TextBlock Grid.Row="1" Text="{Binding MarkedItems.Count}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -4,15 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DocumentClassifierGUI"
+        xmlns:documentclassselectioncontrols="clr-namespace:DocumentClassifierGUI.DocumentClassSelectionControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Document Classifier GUI" Height="850" Width="1200"
+        WindowState="Maximized"
+        KeyDown="Window_KeyDown">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" MaxWidth="200"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*" MaxWidth="220"/>
         </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ContentControl Name="DocumentSelectorControl" Grid.Row="0"/>
+            <ContentControl Name="DocumentClassSelectionControl" Grid.Row="1"/>
+        </Grid>
         
-        <ContentControl Name="DocumentMarkingControl" Grid.Column="1" />
+        <ContentControl Name="DocumentMarkingZoomableControl" Grid.Column="1" Panel.ZIndex="-1"/>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ContentControl Name="OnScreenMarkedItemsControl" Grid.Row="0"/>
+        </Grid>
     </Grid>
 </Window>
