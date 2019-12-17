@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 
 namespace DocumentClassifierGUI.DocumentSelectorControls
 {
@@ -11,7 +10,8 @@ namespace DocumentClassifierGUI.DocumentSelectorControls
         public List<MarkedItem> MarkedItems { get; private set; }
 
         public string Name { get; private set; }
-        public Status DocumentStatus {
+        public Status DocumentStatus
+        {
             get => documentStatus;
             private set
             {

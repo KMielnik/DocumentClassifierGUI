@@ -2,7 +2,7 @@
 
 namespace DocumentClassifierGUI.DocumentSelectorControls
 {
-    public class DocumentSelectionChagnedEventArgs: EventArgs
+    public class DocumentSelectionChagnedEventArgs : EventArgs
     {
         public Document document { get; private set; }
 

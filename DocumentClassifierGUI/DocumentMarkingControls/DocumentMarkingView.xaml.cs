@@ -1,20 +1,15 @@
-﻿using System;
+﻿using DocumentClassifierGUI.DocumentSelectorControls;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DocumentClassifierGUI.DocumentSelectorControls;
 
 namespace DocumentClassifierGUI
 {
@@ -49,7 +44,7 @@ namespace DocumentClassifierGUI
 
         private void MarkedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if(e.Action == NotifyCollectionChangedAction.Add)
+            if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (MarkedItem newItem in e.NewItems)
                 {
@@ -203,9 +198,9 @@ namespace DocumentClassifierGUI
 
             var pngEncoder = new PngBitmapEncoder();
             pngEncoder.Frames.Add(BitmapFrame.Create(resized));
-            
 
-            using(var fs = System.IO.File.OpenWrite(@$"masks/{actualDocument.Name}.png"))
+
+            using (var fs = System.IO.File.OpenWrite(@$"masks/{actualDocument.Name}.png"))
             {
                 pngEncoder.Save(fs);
             }

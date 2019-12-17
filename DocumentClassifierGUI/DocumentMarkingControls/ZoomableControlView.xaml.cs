@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DocumentClassifierGUI
 {
@@ -46,8 +37,8 @@ namespace DocumentClassifierGUI
                 translateTransform.X += (scaleTransform.CenterX - oldCenterX) * (scaleTransform.ScaleX - 1);
                 translateTransform.Y += (scaleTransform.CenterY - oldCenterY) * (scaleTransform.ScaleY - 1);
 
-                scaleTransform.ScaleX*= ZoomFactor;
-                scaleTransform.ScaleY*= ZoomFactor;
+                scaleTransform.ScaleX *= ZoomFactor;
+                scaleTransform.ScaleY *= ZoomFactor;
             }
 
             if (e.Delta < 0)
