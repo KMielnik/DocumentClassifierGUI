@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -194,9 +195,11 @@ namespace DocumentClassifierGUI
 
             rtb.Render(DocumentSurface);
 
+            var image = new BitmapImage(new Uri(@$"documents/{actualDocument.Name}.jpg", UriKind.Relative));
+
             var resized = new TransformedBitmap(rtb, new ScaleTransform(
-                595 / DocumentSurface.RenderSize.Width,
-                726 / DocumentSurface.RenderSize.Height));
+                image.PixelWidth / DocumentSurface.RenderSize.Width,
+                image.PixelHeight / DocumentSurface.RenderSize.Height));
 
             var pngEncoder = new PngBitmapEncoder();
             pngEncoder.Frames.Add(BitmapFrame.Create(resized));

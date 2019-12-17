@@ -38,6 +38,8 @@ namespace DocumentClassifierGUI.DocumentClassSelectionControls
                 "Text" => DocumentClasses.Text,
                 "Sign" => DocumentClasses.Sign,
                 "Stamp" => DocumentClasses.Stamp,
+                "Table" => DocumentClasses.Table,
+                "Data" => DocumentClasses.Data,
                 _ => throw new ApplicationException("This document class has not been implemented yet.")
             };
 
