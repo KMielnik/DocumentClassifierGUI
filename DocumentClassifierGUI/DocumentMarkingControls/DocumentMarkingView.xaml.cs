@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DocumentClassifierGUI.DocumentSelectorControls;
 
 namespace DocumentClassifierGUI
 {
@@ -21,6 +22,7 @@ namespace DocumentClassifierGUI
     /// </summary>
     public partial class DocumentMarkingView : UserControl, IDocumentMarkingView
     {
+        private Document actualDocument;
         private Polygon actualPolygon;
         private (string Name, Brush Color) actualItemClass;
 
@@ -38,7 +40,6 @@ namespace DocumentClassifierGUI
             actualItemClass = DocumentClasses.Text;
             resetActualPolygon();
 
-            DocumentSurface.Background = new ImageBrush(new BitmapImage(new Uri(@"test_document.jpg", UriKind.Relative))) { Stretch = Stretch.Fill };
 
             actualPolygonCheckpoints.CollectionChanged += ActualPolygonCheckpoints_CollectionChanged;
             markedItems.CollectionChanged += MarkedItems_CollectionChanged;
@@ -50,13 +51,27 @@ namespace DocumentClassifierGUI
             if(e.Action == NotifyCollectionChangedAction.Add)
             {
                 foreach (MarkedItem newItem in e.NewItems)
+                {
                     DocumentSurface.Children.Add(newItem.polygon);
+                    actualDocument.AddMarkedItem(newItem);
+                }
             }
 
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 foreach (MarkedItem deletedItem in e.OldItems)
+                {
                     DocumentSurface.Children.Remove(deletedItem.polygon);
+                    actualDocument.RemoveMarkedItem(deletedItem);
+                }
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                DocumentSurface.Children
+                    .OfType<Polygon>()
+                    .ToList()
+                    .ForEach(x => DocumentSurface.Children.Remove(x));
             }
         }
 
@@ -135,6 +150,9 @@ namespace DocumentClassifierGUI
 
         public void SaveActualElement()
         {
+            if (actualDocument == null)
+                return;
+
             if (actualPolygon.Points.Count <= 4)
                 return;
 
@@ -150,6 +168,9 @@ namespace DocumentClassifierGUI
             resetActualPolygon();
 
             markedItems.Add(new MarkedItem(actualItemClass, polygon));
+
+            if (actualDocument.DocumentStatus != Document.Status.MaskGenerated)
+                actualDocument.SetAsMarked();
         }
 
         public void SetActualDocumentClass((string Name, Brush Color) newItemClass)
@@ -181,17 +202,42 @@ namespace DocumentClassifierGUI
             pngEncoder.Frames.Add(BitmapFrame.Create(resized));
             
 
-            using(var fs = System.IO.File.OpenWrite("mask.png"))
+            using(var fs = System.IO.File.OpenWrite(@$"masks/{actualDocument.Name}.png"))
             {
                 pngEncoder.Save(fs);
             }
 
             DocumentSurface.Background = background;
+
+            actualDocument.SetAsMaskGenerated();
         }
 
         public void DeleteMarkedItem(MarkedItem markedItem)
         {
             markedItems.Remove(markedItem);
+
+            if (actualDocument.MarkedItems.Count == 0 && actualDocument.DocumentStatus != Document.Status.MaskGenerated)
+                actualDocument.SetAsNew();
+        }
+
+        public void ChangeDocument(Document newDocument)
+        {
+            actualItemClass = DocumentClasses.Text;
+
+            actualDocument = newDocument;
+            markedItems.Clear();
+            resetActualPolygon();
+
+            DocumentSurface.Background = new ImageBrush(new BitmapImage(new Uri(@$"documents/{actualDocument.Name}.jpg", UriKind.Relative))) { Stretch = Stretch.Fill };
+
+            var existingItems = actualDocument.MarkedItems
+                .ToList();
+
+            actualDocument.MarkedItems
+                .Clear();
+
+            existingItems
+                .ForEach(x => markedItems.Add(x));
         }
     }
 }

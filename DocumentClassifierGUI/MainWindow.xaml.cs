@@ -42,6 +42,8 @@ namespace DocumentClassifierGUI
         {
             documentSelectorView = new DocumentSelectorView();
 
+            documentSelectorView.DocumentSelectionChagned += (s, e) => documentMarkingView.ChangeDocument(e.document);
+
             DocumentSelectorControl.Content = documentSelectorView;
         }
 
