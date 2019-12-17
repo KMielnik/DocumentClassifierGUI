@@ -1,4 +1,5 @@
 ﻿using DocumentClassifierGUI.DocumentClassSelectionControls;
+using DocumentClassifierGUI.DocumentSelectorControls;
 using DocumentClassifierGUI.OnScreenMarkedItemsControls;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace DocumentClassifierGUI
         IDocumentMarkingView documentMarkingView;
         IDocumentClassSelectionView documentClassSelectionView;
         IOnScreenMarkedItemsView onScreenMarkedItemsView;
+        IDocumentSelectorView documentSelectorView;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +35,14 @@ namespace DocumentClassifierGUI
             DocumentMarkingViewSetup();
             DocumentClassSelectionSetup();
             OnScreenMarkedItemsViewSetup();
+            DocumentSelectorViewSetup();
+        }
+
+        private void DocumentSelectorViewSetup()
+        {
+            documentSelectorView = new DocumentSelectorView();
+
+            DocumentSelectorControl.Content = documentSelectorView;
         }
 
         private void OnScreenMarkedItemsViewSetup()

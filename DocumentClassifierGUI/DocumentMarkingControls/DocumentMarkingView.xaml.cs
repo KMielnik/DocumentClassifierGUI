@@ -42,7 +42,7 @@ namespace DocumentClassifierGUI
 
             actualPolygonCheckpoints.CollectionChanged += ActualPolygonCheckpoints_CollectionChanged;
             markedItems.CollectionChanged += MarkedItems_CollectionChanged;
-            markedItems.CollectionChanged += (s,e) => MarkedItemsChanged?.Invoke(s, new MarkedItemsChangedEventArgs(markedItems));
+            markedItems.CollectionChanged += (s, e) => MarkedItemsChanged?.Invoke(s, new MarkedItemsChangedEventArgs(markedItems));
         }
 
         private void MarkedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

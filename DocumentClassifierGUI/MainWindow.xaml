@@ -20,7 +20,8 @@
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
+            <ContentControl Name="DocumentSelectorControl" Grid.Row="0"/>
             <ContentControl Name="DocumentClassSelectionControl" Grid.Row="1"/>
         </Grid>
         
