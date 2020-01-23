@@ -1,16 +1,18 @@
 ﻿using DocumentClassifierGUI.DocumentClassSelectionControls;
 using DocumentClassifierGUI.DocumentSelectorControls;
 using DocumentClassifierGUI.OnScreenMarkedItemsControls;
+using MahApps.Metro.Controls;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace DocumentClassifierGUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         IDocumentMarkingView documentMarkingView;
         IDocumentClassSelectionView documentClassSelectionView;
@@ -80,6 +82,11 @@ namespace DocumentClassifierGUI
                 documentMarkingView.SaveActualElement();
             else if (e.Key == Key.Tab)
                 documentMarkingView.SaveMaskToFile(new Uri("mask.png", UriKind.Relative));
+        }
+
+        private async void InstructionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.ShowMessageAsync("Instrukcje", "Lewym oznaczanie\nPrawym uswanie ostatniego punktu\nScroll myszki dziala do przyblizania\nSrodkowym myszki trzymanym mozna przesuwac dokument\nEnter potwierdza aktualny obiekt\nTab zapisuje maske do pliku\n\nNIE ZMIENIAC WIELKOSCI OKNA PODCZAS OZNACZANIA BO SIE ZBUGUJE\nElementy sie rozjada bo ich nie skaluje przy zmianie okna :)\n\nJak czasami enter nie dziala, zmienic maske na inna i spowrotem, odblokuje sie.\nW podgladzie plikow oznaczone z zapisana maska sa na zielono, na zolto aktualnie oznaczane w programie na czerwono te do zrobienia jeszcze.");
         }
     }
 }
