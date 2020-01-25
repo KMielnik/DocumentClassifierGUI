@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DocumentClassifierGUI</name>
+    </assembly>
+    <members>
+        <member name="T:DocumentClassifierGUI.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionView">
+            <summary>
+            Interaction logic for DocumentClassSelectionView.xaml
+            </summary>
+            <summary>
+            DocumentClassSelectionView
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.DocumentMarkingView">
+            <summary>
+            Interaction logic for DocumentMarkingView.xaml
+            </summary>
+            <summary>
+            DocumentMarkingView
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.ZoomableControlView">
+            <summary>
+            Interaction logic for ZoomableControlView.xaml
+            </summary>
+            <summary>
+            ZoomableControlView
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.ZoomableControlView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentSelectorControls.Document.documentStatus">
+            <summary>
+            statussss
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.SetAsNew">
+            <summary>
+            Zmienia status dokumentu na nowy - nieoznaczony.
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView">
+            <summary>
+            Interaction logic for DocumentSelectorView.xaml
+            </summary>
+            <summary>
+            DocumentSelectorView
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView">
+            <summary>
+            Interaction logic for OnScreenMarkedItemsView.xaml
+            </summary>
+            <summary>
+            OnScreenMarkedItemsView
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

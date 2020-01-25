@@ -5,6 +5,9 @@ using System.Windows.Media;
 
 namespace DocumentClassifierGUI.DocumentSelectorControls
 {
+    /// <summary>
+    /// Konwerter pomagajacy w konwersji statusu dokumentu na kolor jego statusu w GUI.
+    /// </summary>
     class StatusConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
