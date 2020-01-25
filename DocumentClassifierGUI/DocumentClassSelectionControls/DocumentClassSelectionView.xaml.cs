@@ -4,17 +4,28 @@ using System.Windows.Controls;
 namespace DocumentClassifierGUI.DocumentClassSelectionControls
 {
     /// <summary>
-    /// Interaction logic for DocumentClassSelectionView.xaml
+    /// Logika interackcji dla DocumentClassSelectionView.xaml, pozwalajacego na zmiane typu aktualnego oznaczenia.
     /// </summary>
     public partial class DocumentClassSelectionView : UserControl, IDocumentClassSelectionView
     {
+        /// <summary>
+        /// Konstruktor klasy,
+        /// </summary>
         public DocumentClassSelectionView()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Zdarzenie zmiany wyboru typu oznaczenia.
+        /// </summary>
         public event EventHandler<DocumentClassSelectionChangedEventAgrs> SelectionChanged;
 
+        /// <summary>
+        /// Oblsuga zdarzenia zmiany wyboru typu oznaczenia.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DocumentClassListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listBoxItem = (ListBoxItem)e.AddedItems[0];
