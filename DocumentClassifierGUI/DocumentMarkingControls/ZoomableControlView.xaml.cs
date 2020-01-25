@@ -5,12 +5,22 @@ using System.Windows.Input;
 namespace DocumentClassifierGUI
 {
     /// <summary>
-    /// Interaction logic for ZoomableControlView.xaml
+    /// Logika interakcji dla ZoomableControlView.xaml, pozwalajacej na przyblizanie widoku.
     /// </summary>
     public partial class ZoomableControlView : UserControl
     {
+        /// <summary>
+        /// Zawartosc do przyblizania
+        /// </summary>
         public new object Content { private set; get; }
+        /// <summary>
+        /// Predkosc przyblizania widoku.
+        /// </summary>
         private const double ZoomFactor = 1.1;
+        /// <summary>
+        /// Konstruktor.
+        /// </summary>
+        /// <param name="control">Widok do umieszczenia w przyblizalnej kontrolce.</param>
         public ZoomableControlView(object control)
         {
             InitializeComponent();
@@ -20,6 +30,11 @@ namespace DocumentClassifierGUI
             ZoomableControl.Content = control;
         }
 
+        /// <summary>
+        /// Obsluga przyblizania/oddalania myszka.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ZoomableControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             var panel = sender as Panel;
@@ -50,9 +65,15 @@ namespace DocumentClassifierGUI
                 translateTransform.Y = 0;
             }
         }
-
+        /// <summary>
+        /// Punkt pomagajacy przy operacji przesuwania widoku.
+        /// </summary>
         private Point previousPosition;
-
+        /// <summary>
+        /// obsluga zdarzenia poruszenia myszka, przesuwajaca widok.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ZoomableControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.MiddleButton == MouseButtonState.Pressed)
@@ -65,6 +86,11 @@ namespace DocumentClassifierGUI
             }
         }
 
+        /// <summary>
+        /// Obsluga zdarzenia wcisniecia srodkowego przycisku myszki, pozwalajacego na przesuwanie widoku.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ZoomableControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Middle)

@@ -14,21 +14,45 @@ using System.Windows.Shapes;
 namespace DocumentClassifierGUI
 {
     /// <summary>
-    /// Interaction logic for DocumentMarkingView.xaml
+    /// Logika interakcji dla DocumentMarkingView.xaml, umożliwiajacego oznaczanie dokumentu.
     /// </summary>
     public partial class DocumentMarkingView : UserControl, IDocumentMarkingView
     {
+        /// <summary>
+        /// aktualnie oznaczany dokument.
+        /// </summary>
         private Document actualDocument;
+        /// <summary>
+        /// aktualne wykonywane oznaczenie.
+        /// </summary>
         private Polygon actualPolygon;
+        /// <summary>
+        /// Typ atkualnego oznaczenia.
+        /// </summary>
         private (string Name, Brush Color) actualItemClass;
 
+        /// <summary>
+        /// Punkty wykonanej interakcji od uzytkownika, uzywane podczas operacji cofania.
+        /// </summary>
         private ObservableCollection<Point> actualPolygonCheckpoints = new ObservableCollection<Point>();
+        /// <summary>
+        /// Punkty do wyswietlania w GUI
+        /// </summary>
         private List<Ellipse> points = new List<Ellipse>();
 
+        /// <summary>
+        /// Aktualnie znajdujace sie oznaczenia na ekranie.
+        /// </summary>
         private ObservableCollection<MarkedItem> markedItems = new ObservableCollection<MarkedItem>();
 
+        /// <summary>
+        /// Event wyzwalany w przypadku zmiany listy oznaczen.
+        /// </summary>
         public event EventHandler<MarkedItemsChangedEventArgs> MarkedItemsChanged;
 
+        /// <summary>
+        /// Inicjalizacja klasy.
+        /// </summary>
         public DocumentMarkingView()
         {
             InitializeComponent();
@@ -42,6 +66,11 @@ namespace DocumentClassifierGUI
             markedItems.CollectionChanged += (s, e) => MarkedItemsChanged?.Invoke(s, new MarkedItemsChangedEventArgs(markedItems));
         }
 
+        /// <summary>
+        /// Obsluga zmiany listy oznaczen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MarkedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
@@ -71,6 +100,11 @@ namespace DocumentClassifierGUI
             }
         }
 
+        /// <summary>
+        /// Obsluga zdarzenia interakcji od uzytkownika dodajacej punkt kontrolny.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ActualPolygonCheckpoints_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             foreach (var point in points)
@@ -97,7 +131,9 @@ namespace DocumentClassifierGUI
                 Canvas.SetTop(elipse, point.Y - elipse.Height / 2);
             }
         }
-
+        /// <summary>
+        /// Resetuje aktualne oznaczenie.
+        /// </summary>
         private void resetActualPolygon()
         {
             DocumentSurface.Children.Remove(actualPolygon);
@@ -114,6 +150,11 @@ namespace DocumentClassifierGUI
             DocumentSurface.Children.Add(actualPolygon);
         }
 
+        /// <summary>
+        /// Obsluga zdarzenia klikniecia myszka.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DocumentSurface_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -138,12 +179,20 @@ namespace DocumentClassifierGUI
             }
         }
 
+        /// <summary>
+        /// Obsluga zdarzenia poruszenia myszka. Dodaje punkty w przypadku trzymania lewego klawisza myszki
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DocumentSurface_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 actualPolygon.Points.Add(e.GetPosition(this));
         }
 
+        /// <summary>
+        /// Zapisuje aktualne oznaczenie do listy po czym resetuje aktualne oznaczenie, przygotowujac sie na kolejne.
+        /// </summary>
         public void SaveActualElement()
         {
             if (actualDocument == null)
@@ -169,6 +218,10 @@ namespace DocumentClassifierGUI
                 actualDocument.SetAsMarked();
         }
 
+        /// <summary>
+        /// Zmiana typu aktualnego oznaczenia.
+        /// </summary>
+        /// <param name="newItemClass">Nowy typ oznaczenia.</param>
         public void SetActualDocumentClass((string Name, Brush Color) newItemClass)
         {
             actualItemClass = newItemClass;
@@ -176,6 +229,9 @@ namespace DocumentClassifierGUI
             actualPolygon.Fill = actualItemClass.Color;
         }
 
+        /// <summary>
+        /// Funkcja generujaca maske dla aktualnego dokumentu.
+        /// </summary>
         public void SaveMaskToFile(Uri location)
         {
             var rtb = new RenderTargetBitmap(
@@ -210,6 +266,10 @@ namespace DocumentClassifierGUI
             actualDocument.SetAsMaskGenerated();
         }
 
+        /// <summary>
+        /// Usuwa podany oznaczony element z listy
+        /// </summary>
+        /// <param name="markedItem">Oznaczenie do usuniecia.</param>
         public void DeleteMarkedItem(MarkedItem markedItem)
         {
             markedItems.Remove(markedItem);
@@ -218,6 +278,10 @@ namespace DocumentClassifierGUI
                 actualDocument.SetAsNew();
         }
 
+        /// <summary>
+        /// Zmiana aktualnie oznaczanego dokumentu. Wczytuje istniejace dla aktualnego dokumentu oznaczenia na ekran oraz resetuje aktualne oznaczenie.
+        /// </summary>
+        /// <param name="newDocument">Nowy dokument do oznaczania.</param>
         public void ChangeDocument(Document newDocument)
         {
             actualItemClass = DocumentClasses.Text;
