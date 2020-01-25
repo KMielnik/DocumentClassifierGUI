@@ -6,9 +6,6 @@
     <members>
         <member name="T:DocumentClassifierGUI.App">
             <summary>
-            Interaction logic for App.xaml
-            </summary>
-            <summary>
             App
             </summary>
         </member>
@@ -22,13 +19,76 @@
             Application Entry Point.
             </summary>
         </member>
+        <member name="T:DocumentClassifierGUI.DocumentClasses">
+            <summary>
+            Klasa zawierajaca możliwe typy oznaczen dokumentu.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentClasses.Stamp">
+            <summary>
+            Pieczatka
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentClasses.Text">
+            <summary>
+            Tekst drukowany.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentClasses.Sign">
+            <summary>
+            Pieczatka/Obrazek.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentClasses.Table">
+            <summary>
+            Tabela.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentClasses.Data">
+            <summary>
+            Data.
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionChangedEventAgrs">
+            <summary>
+            Argumenty zdarzenia Zmiany wyboru typu aktualnego oznaczenia.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionChangedEventAgrs.NewClass">
+            <summary>
+            Nowy wybrany typ oznaczenia.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionChangedEventAgrs.#ctor(System.ValueTuple{System.String,System.Windows.Media.Brush})">
+            <summary>
+            Konstruktor
+            </summary>
+            <param name="newClass">Nowy wybrany typ oznaczenia.</param>
+        </member>
         <member name="T:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionView">
             <summary>
-            Interaction logic for DocumentClassSelectionView.xaml
+            Logika interackcji dla DocumentClassSelectionView.xaml, pozwalajacego na zmiane typu aktualnego oznaczenia.
             </summary>
             <summary>
             DocumentClassSelectionView
             </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionView.#ctor">
+            <summary>
+            Konstruktor klasy,
+            </summary>
+        </member>
+        <member name="E:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionView.SelectionChanged">
+            <summary>
+            Zdarzenie zmiany wyboru typu oznaczenia.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionView.DocumentClassListBox_SelectionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            Oblsuga zdarzenia zmiany wyboru typu oznaczenia.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionView.InitializeComponent">
             <summary>
@@ -37,73 +97,502 @@
         </member>
         <member name="T:DocumentClassifierGUI.DocumentMarkingView">
             <summary>
-            Interaction logic for DocumentMarkingView.xaml
+            Logika interakcji dla DocumentMarkingView.xaml, umożliwiajacego oznaczanie dokumentu.
             </summary>
             <summary>
             DocumentMarkingView
             </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentMarkingView.actualDocument">
+            <summary>
+            aktualnie oznaczany dokument.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentMarkingView.actualPolygon">
+            <summary>
+            aktualne wykonywane oznaczenie.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentMarkingView.actualItemClass">
+            <summary>
+            Typ atkualnego oznaczenia.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentMarkingView.actualPolygonCheckpoints">
+            <summary>
+            Punkty wykonanej interakcji od uzytkownika, uzywane podczas operacji cofania.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentMarkingView.points">
+            <summary>
+            Punkty do wyswietlania w GUI
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentMarkingView.markedItems">
+            <summary>
+            Aktualnie znajdujace sie oznaczenia na ekranie.
+            </summary>
+        </member>
+        <member name="E:DocumentClassifierGUI.DocumentMarkingView.MarkedItemsChanged">
+            <summary>
+            Event wyzwalany w przypadku zmiany listy oznaczen.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.#ctor">
+            <summary>
+            Inicjalizacja klasy.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.MarkedItems_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Obsluga zmiany listy oznaczen.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.ActualPolygonCheckpoints_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Obsluga zdarzenia interakcji od uzytkownika dodajacej punkt kontrolny.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.resetActualPolygon">
+            <summary>
+            Resetuje aktualne oznaczenie.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.DocumentSurface_MouseDown(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Obsluga zdarzenia klikniecia myszka.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.DocumentSurface_MouseMove(System.Object,System.Windows.Input.MouseEventArgs)">
+            <summary>
+            Obsluga zdarzenia poruszenia myszka. Dodaje punkty w przypadku trzymania lewego klawisza myszki
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.SaveActualElement">
+            <summary>
+            Zapisuje aktualne oznaczenie do listy po czym resetuje aktualne oznaczenie, przygotowujac sie na kolejne.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.SetActualDocumentClass(System.ValueTuple{System.String,System.Windows.Media.Brush})">
+            <summary>
+            Zmiana typu aktualnego oznaczenia.
+            </summary>
+            <param name="newItemClass">Nowy typ oznaczenia.</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.SaveMaskToFile(System.Uri)">
+            <summary>
+            Funkcja generujaca maske dla aktualnego dokumentu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.DeleteMarkedItem(DocumentClassifierGUI.MarkedItem)">
+            <summary>
+            Usuwa podany oznaczony element z listy
+            </summary>
+            <param name="markedItem">Oznaczenie do usuniecia.</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentMarkingView.ChangeDocument(DocumentClassifierGUI.DocumentSelectorControls.Document)">
+            <summary>
+            Zmiana aktualnie oznaczanego dokumentu. Wczytuje istniejace dla aktualnego dokumentu oznaczenia na ekran oraz resetuje aktualne oznaczenie.
+            </summary>
+            <param name="newDocument">Nowy dokument do oznaczania.</param>
         </member>
         <member name="M:DocumentClassifierGUI.DocumentMarkingView.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
         </member>
+        <member name="T:DocumentClassifierGUI.MarkedItem">
+            <summary>
+            Klasa przedstawiająca pojedyńcze oznaczenie na dokumencie.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.MarkedItem.Type">
+            <summary>
+            Typ oznaczenia
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.MarkedItem.Color">
+            <summary>
+            Kolor oznaczenia
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.MarkedItem.polygon">
+            <summary>
+            Obiekt oznaczenia.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MarkedItem.#ctor(System.ValueTuple{System.String,System.Windows.Media.Brush},System.Windows.Shapes.Polygon)">
+            <summary>
+            Konstruktor oznaczenia.
+            </summary>
+            <param name="documentClass">Typ oznaczenia.</param>
+            <param name="polygon">Obiekt oznaczenia zawierajacy punkty.</param>
+        </member>
+        <member name="T:DocumentClassifierGUI.MarkedItemsChangedEventArgs">
+            <summary>
+            Argumenty zdarzenia zmiany zawartosci listy oznaczen w dokumencie.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.MarkedItemsChangedEventArgs.Items">
+            <summary>
+            Aktualne oznaczenia.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MarkedItemsChangedEventArgs.#ctor(System.Collections.ObjectModel.ObservableCollection{DocumentClassifierGUI.MarkedItem})">
+            <summary>
+            Konstruktor klasy.
+            </summary>
+            <param name="items">Aktualne oznaczenia.</param>
+        </member>
         <member name="T:DocumentClassifierGUI.ZoomableControlView">
             <summary>
-            Interaction logic for ZoomableControlView.xaml
+            Logika interakcji dla ZoomableControlView.xaml, pozwalajacej na przyblizanie widoku.
             </summary>
             <summary>
             ZoomableControlView
             </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.ZoomableControlView.Content">
+            <summary>
+            Zawartosc do przyblizania
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.ZoomableControlView.ZoomFactor">
+            <summary>
+            Predkosc przyblizania widoku.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.ZoomableControlView.#ctor(System.Object)">
+            <summary>
+            Konstruktor.
+            </summary>
+            <param name="control">Widok do umieszczenia w przyblizalnej kontrolce.</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.ZoomableControlView.ZoomableControl_MouseWheel(System.Object,System.Windows.Input.MouseWheelEventArgs)">
+            <summary>
+            Obsluga przyblizania/oddalania myszka.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:DocumentClassifierGUI.ZoomableControlView.previousPosition">
+            <summary>
+            Punkt pomagajacy przy operacji przesuwania widoku.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.ZoomableControlView.ZoomableControl_MouseMove(System.Object,System.Windows.Input.MouseEventArgs)">
+            <summary>
+            obsluga zdarzenia poruszenia myszka, przesuwajaca widok.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.ZoomableControlView.ZoomableControl_MouseDown(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Obsluga zdarzenia wcisniecia srodkowego przycisku myszki, pozwalajacego na przesuwanie widoku.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:DocumentClassifierGUI.ZoomableControlView.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
         </member>
-        <member name="F:DocumentClassifierGUI.DocumentSelectorControls.Document.documentStatus">
+        <member name="T:DocumentClassifierGUI.DocumentSelectorControls.Document">
             <summary>
-            statussss
+            Klasa przedstawiająca dokument, możliwy do oznaczania oraz zawierajacy informacje potrzebne do wygenerowania dla niego maski.
             </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentSelectorControls.Document.MarkedItems">
+            <summary>
+            zwraca liste oznaczeń na dokumencie.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentSelectorControls.Document.Name">
+            <summary>
+            Nazwa dokumentu.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentSelectorControls.Document.DocumentStatus">
+            <summary>
+            Status dokumentu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.#ctor(System.String,System.Collections.Generic.List{DocumentClassifierGUI.MarkedItem})">
+            <summary>
+            Tworzy dokument z istniejacymi na nim oznaczeniami.
+            </summary>
+            <param name="name">Nazwa dokumentu.</param>
+            <param name="markedItems">Oznaczenia.</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.#ctor(System.String)">
+            <summary>
+            Tworzy pusty - nieoznaczony dokument.
+            </summary>
+            <param name="name">Nazwa dokumentu.</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.ResetMarkedItems">
+            <summary>
+            Usuwa oznaczone elementy w dokumencie.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.SetMarkedItems(System.Collections.Generic.List{DocumentClassifierGUI.MarkedItem})">
+            <summary>
+            Ustawia oznaczone elementy w dokumencie na te przekazane do funkcji.
+            </summary>
+            <param name="markedItems">Nowe oznaczenia</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.AddMarkedItem(DocumentClassifierGUI.MarkedItem)">
+            <summary>
+            Dodaje jedno oznaczenie do dokumentu.
+            </summary>
+            <param name="markedItem">Oznaczonyt element</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.RemoveMarkedItem(DocumentClassifierGUI.MarkedItem)">
+            <summary>
+            Usuwa podany w parametrze oznaczony element z dokumentu.
+            </summary>
+            <param name="markedItem">Element do usuniecia</param>
         </member>
         <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.SetAsNew">
             <summary>
             Zmienia status dokumentu na nowy - nieoznaczony.
             </summary>
         </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.SetAsMarked">
+            <summary>
+            Zmienia status dokumentu na oznaczony.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.Document.SetAsMaskGenerated">
+            <summary>
+            Zmienia status dokumentu na dokument z maska wygenerowana do pliku.
+            </summary>
+        </member>
+        <member name="T:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectionChagnedEventArgs">
+            <summary>
+            Klasa zawierajaca argumenty dla zdarzenia wybrania dokumentu na liscie.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectionChagnedEventArgs.document">
+            <summary>
+            Wybrany dokument.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectionChagnedEventArgs.#ctor(DocumentClassifierGUI.DocumentSelectorControls.Document)">
+            <summary>
+            Konstruktor przyjmujacy wybrany dokument.
+            </summary>
+            <param name="selectedDocument"></param>
+        </member>
         <member name="T:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView">
             <summary>
-            Interaction logic for DocumentSelectorView.xaml
+            Logika interakcji dla DocumentSelectorView.xaml, umożliwiajaca wybieranie dokumentu do oznaczania z folderu documents.
             </summary>
             <summary>
             DocumentSelectorView
             </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.DocumentsFolderName">
+            <summary>
+            Folder z dokumentami do oznaczenia.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.MasksFolderName">
+            <summary>
+            Folder z maskami dla oznaczonych dokumentow.
+            </summary>
+        </member>
+        <member name="E:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.DocumentSelectionChagned">
+            <summary>
+            Zdarzenie wybrania nowego dokumentu z listy.
+            </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.documents">
+            <summary>
+            Dokumenty dostepne w folderze dokumentow.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.LoadDocuments">
+            <summary>
+            Ładowanie dokumentow z folderu dokumentów do listy, wraz z ich statusem.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.ListBox_SelectionChanged(System.Object,System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            Oblsuga zdarzenia zmiany wybranego dokumentu.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:DocumentClassifierGUI.DocumentSelectorControls.DocumentSelectorView.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
         </member>
+        <member name="T:DocumentClassifierGUI.DocumentSelectorControls.StatusConverter">
+            <summary>
+            Konwerter pomagajacy w konwersji statusu dokumentu na kolor jego statusu w GUI.
+            </summary>
+        </member>
         <member name="T:DocumentClassifierGUI.MainWindow">
             <summary>
-            Interaction logic for MainWindow.xaml
+            Logika interakcji dla MainWindow.xaml, glownego widoku programu.
             </summary>
             <summary>
             MainWindow
             </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.MainWindow.documentMarkingView">
+            <summary>
+            Widok elementu interfejsu pozwalajacego na oznaczanie dokumentu.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.MainWindow.documentClassSelectionView">
+            <summary>
+            Widok elementu interfejsu pozwalajacego na wybor typu aktualnie oznaczanego elementu.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.MainWindow.onScreenMarkedItemsView">
+            <summary>
+            Widok elementu interfejsu pozwalajacego na zarzadzanie oznaczeniami na aktualnym dokumencie.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.MainWindow.documentSelectorView">
+            <summary>
+            Widok elementu interfejsu pozwalajacego na wybor oznaczanego dokumentu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.#ctor">
+            <summary>
+            Konstruktor przygotowujacy wszystkie elementy interfejsu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.DocumentSelectorViewSetup">
+            <summary>
+            Przygotowywanie elementu interfejsu pozwalajacego na wybor oznaczanego dokumentu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.OnScreenMarkedItemsViewSetup">
+            <summary>
+            Przygotowywanie elementu interfejsu pozwalajacego na zarzadzanie oznaczeniami na aktualnym dokumencie.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.DocumentClassSelectionSetup">
+            <summary>
+            Przygotowywanie elementu interfejsu pozwalajacego na wybor typu aktualnie oznaczanego elementu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.DocumentClassSelectionView_SelectionChanged(System.Object,DocumentClassifierGUI.DocumentClassSelectionControls.DocumentClassSelectionChangedEventAgrs)">
+            <summary>
+            Obsluga zdarzenia zmiany wyboru typu dokumentu.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.DocumentMarkingViewSetup">
+            <summary>
+            Przygotowanie elementu interfejsu pozwalajacego na oznaczanie dokumentu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.DocumentMarkingView_MarkedItemsChanged(System.Object,DocumentClassifierGUI.MarkedItemsChangedEventArgs)">
+            <summary>
+            Obluga zdarzenia zmiany listy aktualnych oznaczen.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.Window_KeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Obsluga zdarzenia klawiszy enter oraz tabulacji.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.MainWindow.InstructionsButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Obsluga zdarzenia wcisniecia przycisku wyswietlajacego okienko z informacjami dla uzytkownika aplikacji.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:DocumentClassifierGUI.MainWindow.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
         </member>
+        <member name="T:DocumentClassifierGUI.OnScreenMarkedItemsControls.MarkedItemDeletedEventArgs">
+            <summary>
+            Argumenty zdarzenia wywolywanego podczas usuwania oznaczonego elementu z listy.
+            </summary>
+        </member>
+        <member name="F:DocumentClassifierGUI.OnScreenMarkedItemsControls.MarkedItemDeletedEventArgs.deletedItem">
+            <summary>
+            Element do usuniecia.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.MarkedItemDeletedEventArgs.#ctor(DocumentClassifierGUI.MarkedItem)">
+            <summary>
+            Konstruktor klasy.
+            </summary>
+            <param name="markedItem">Element do usuniecia</param>
+        </member>
         <member name="T:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView">
             <summary>
-            Interaction logic for OnScreenMarkedItemsView.xaml
+            Logika interakcji dla OnScreenMarkedItemsView.xaml, pozwalajacego na zarzadzanie lista oznaczen na aktualnym dokumencie.
             </summary>
             <summary>
             OnScreenMarkedItemsView
             </summary>
+        </member>
+        <member name="P:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.MarkedItems">
+            <summary>
+            Lista oznaczen.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.#ctor">
+            <summary>
+            Konstruktor
+            </summary>
+        </member>
+        <member name="E:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.MarkedItemDeleted">
+            <summary>
+            Zdarzenie usuniecia oznaczenia z listy.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.SetMarkedItems(System.Collections.Generic.List{DocumentClassifierGUI.MarkedItem})">
+            <summary>
+            Ustawienie na liscie aktualnych oznaczen dokumentu.
+            </summary>
+            <param name="markedItems">Oznaczenia do umieszczenia na liscie.</param>
+        </member>
+        <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.TryToDeleteSelectedItem">
+            <summary>
+            Proboje usunac dany oznaczony element z dokumentu.
+            </summary>
+        </member>
+        <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.Grid_KeyDown(System.Object,System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Obsluguje usuniecie obiektu przy pomocy klawisza delete.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.DeleteButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Obsluguje usuniecie obiektu przy pomocy przycisku w GUI.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="M:DocumentClassifierGUI.OnScreenMarkedItemsControls.OnScreenMarkedItemsView.InitializeComponent">
             <summary>
