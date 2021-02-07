@@ -133,7 +133,22 @@ namespace DocumentClassifierGUI
         /// <param name="e"></param>
         private async void InstructionsButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.ShowMessageAsync("Instrukcje", "Lewym oznaczanie\nPrawym uswanie ostatniego punktu\nScroll myszki dziala do przyblizania\nSrodkowym myszki trzymanym mozna przesuwac dokument\nEnter potwierdza aktualny obiekt\nTab zapisuje maske do pliku\n\nNIE ZMIENIAC WIELKOSCI OKNA PODCZAS OZNACZANIA BO SIE ZBUGUJE\nElementy sie rozjada bo ich nie skaluje przy zmianie okna :)\n\nJak czasami enter nie dziala, zmienic maske na inna i spowrotem, odblokuje sie.\nW podgladzie plikow oznaczone z zapisana maska sa na zielono, na zolto aktualnie oznaczane w programie na czerwono te do zrobienia jeszcze.");
+            await this.ShowMessageAsync("Instructions", 
+                "LPM click or draw - place new point\n" +
+                "PPM - delete last drawn point/section\n" +
+                "Scroll - zoom in/out\n" +
+                "Hold middle mouse button - move zoomed in document\n" +
+                "Enter - finish drawing actual mask\n" +
+                "Tab - generate mask for actual document\n\n" +
+                "Place documents to mark in directory \"documents\" next to programs .exe\n" +
+                "Masks are saved in directory \"masks\"\n\n" +
+                "Warning:\n" +
+                "Changing screen size will break masks on actually edited document\n" +
+                "Sometimes saving mask breaks (enter), to fix, change mask type to another and back to the desired one\n\n" +
+                "Statuses:\n" +
+                "Red document: mask not generated, no temp masks\n" +
+                "Yellow document: mask not generated, document is being edited\n" +
+                "Green document: mask generated and saved to file");
         }
     }
 }
